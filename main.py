@@ -2,17 +2,21 @@ from datetime import datetime
 from dateutil.parser import parse
 import requests
 import time
+import sys
+from gpiozero import LED
 
-game_id = '2016021117'
+goalLED = LED(17)
 
 API_ROOT = 'https://statsapi.web.nhl.com'
 
-#TEAM_TO_WATCH = 'COLUMBUS BLUE JACKETS'
-TEAM_TO_WATCH = 'CHICAGO BLACKHAWKS'
+TEAM_TO_WATCH = sys.argv[1].upper()
+print 'Check for', TEAM_TO_WATCH
 
 def triggerGoalLight():
 	print '!!!!!!!!!!!GOAL!!!!!!!!'
+	goalLED.on()
 	time.sleep(10)
+	goalLED.off()
 	print 'Light Off'
 
 def checkForGoal(link):
@@ -47,7 +51,14 @@ def getSchedule():
 				now = datetime.utcnow()
 				if(gameDate > now):
 					diff = gameDate - now
-					time.sleep(diff)
+					print TEAM_TO_WATCH, 'Will play today at', game['gameDate']
+					print 'Delaying', diff
+					time.sleep(diff.total_seconds()-60)
+					# Trigger the Goal Light to let us know to start watching
+					# the game...
+					goalLED.on()
+					time.sleep(30)
+					goalLED.off()
 				checkForGoal(game['link'])
 			else:
 				print 'Ignore', team_names, game['gameDate']
