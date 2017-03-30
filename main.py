@@ -28,13 +28,20 @@ def checkForGoal(link):
 			gameRunning = False
 			print 'Game Over'
 		else:
-			lastEvent = data['liveData']['plays']['currentPlay']
-			if lastEvent['result']['eventTypeId'] == 'GOAL':
-				print 'GOAL', lastEvent['team']['triCode']
-				triggerGoalLight()
-			else:
-				print 'No goal', lastEvent['result']['eventTypeId']
-				time.sleep(10)
+			try:
+				lastEvent = data['liveData']['plays']['currentPlay']
+				if lastEvent['result']['eventTypeId'] == 'GOAL':
+					print 'GOAL', lastEvent['team']['triCode']
+					if lastEvent['team']['name'].strip().upper() == TEAM_TO_WATCH:
+						triggerGoalLight()
+					else:
+						print 'BAD GOAL!', lastEvent['team']['triCode']
+						time.sleep(30)
+				else:
+					print 'No goal', lastEvent['result']['eventTypeId']
+					time.sleep(10)
+			except:
+				time.sleep(60)
 
 def getSchedule():
 	resp = requests.get(API_ROOT + '/api/v1/schedule')
