@@ -15,9 +15,11 @@ print 'Check for', TEAM_TO_WATCH
 def triggerGoalLight():
 	print '!!!!!!!!!!!GOAL!!!!!!!!'
 	goalLED.on()
-	time.sleep(10)
+	time.sleep(30)
 	goalLED.off()
-	print 'Light Off'
+	# Probably not going to have another goal within a minute of
+	# the last one
+	time.sleep(60)
 
 def checkForGoal(link):
 	gameRunning = True
@@ -38,7 +40,7 @@ def checkForGoal(link):
 						print 'BAD GOAL!', lastEvent['team']['triCode']
 						time.sleep(30)
 				else:
-					print 'No goal', lastEvent['result']['eventTypeId']
+					print 'No goal', lastEvent['result']['eventTypeId'], lastEvent['team']['triCode']
 					time.sleep(10)
 			except:
 				time.sleep(60)
