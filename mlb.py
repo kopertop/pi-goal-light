@@ -44,7 +44,7 @@ def getSchedule():
 		for game in date['games']:
 			team_type = None
 			for x in game['teams']:
-				if TEAM_TO_WATCH in game['teams']['away']['team']['name'].upper():
+				if TEAM_TO_WATCH in game['teams'][x]['team']['name'].upper():
 					team_type = x
 
 			if team_type is not None:
