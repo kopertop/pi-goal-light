@@ -28,7 +28,8 @@ def checkForRunScore(link, team_position):
 				if lastEvent['about']['isScoringPlay'] and lastEvent['about']['halfInning'] == team_position:
 					print 'RUN SCORED', lastEvent['about']['halfInning']
 					triggerGoalLight()
-					time.sleep(30)
+					# Certainly won't have another run within 90 seconds
+					time.sleep(90)
 				else:
 					time.sleep(10)
 			except:

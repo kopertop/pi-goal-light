@@ -26,7 +26,8 @@ def checkForGoal(link):
 						triggerGoalLight()
 					else:
 						print 'BAD GOAL!', lastEvent['team']['triCode']
-						time.sleep(30)
+					# Probably not going to have another goal within a minute
+					time.sleep(60)
 				else:
 					print 'No goal', lastEvent['result']['eventTypeId'], lastEvent['team']['triCode']
 					time.sleep(10)
@@ -53,9 +54,7 @@ def getSchedule():
 					time.sleep(diff.total_seconds()-60)
 					# Trigger the Goal Light to let us know to start watching
 					# the game...
-					goalLED.on()
-					time.sleep(30)
-					goalLED.off()
+					triggerGoalLight()
 				checkForGoal(game['link'])
 			else:
 				print 'Ignore', team_names, game['gameDate']
