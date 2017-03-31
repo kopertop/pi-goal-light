@@ -57,9 +57,7 @@ def getSchedule():
 					time.sleep(diff.total_seconds()-60)
 					# Trigger the Goal Light to let us know to start watching
 					# the game...
-					goalLED.on()
-					time.sleep(30)
-					goalLED.off()
+					triggerGoalLight()
 				team_position = 'top'
 				if team_type == 'home':
 					team_position = 'bottom'
