@@ -7,6 +7,7 @@ from dateutil.parser import parse
 import requests
 import time
 import sys
+from light import triggerGoalLight
 
 API_HOST = 'https://statsapi.mlb.com';
 
