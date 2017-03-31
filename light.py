@@ -1,4 +1,5 @@
 # Shared Goal Light resources
+import time
 from gpiozero import LED
 goalLED = LED(17)
 
