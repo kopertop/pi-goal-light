@@ -3,7 +3,7 @@ import time
 from gpiozero import LED
 goalLED = LED(17)
 
-def triggerGoalLight():
+def triggerGoalLight(onTime=15):
 	goalLED.on()
-	time.sleep(30)
+	time.sleep(onTime)
 	goalLED.off()

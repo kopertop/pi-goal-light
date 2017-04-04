@@ -54,7 +54,7 @@ def getSchedule():
 					time.sleep(diff.total_seconds()-60)
 					# Trigger the Goal Light to let us know to start watching
 					# the game...
-					triggerGoalLight()
+					triggerGoalLight(30)
 				checkForGoal(game['link'])
 			else:
 				print 'Ignore', team_names, game['gameDate']

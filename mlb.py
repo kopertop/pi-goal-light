@@ -7,7 +7,7 @@ from dateutil.parser import parse
 import requests
 import time
 import sys
-from light import triggerGoalLight
+#from light import triggerGoalLight
 
 API_HOST = 'https://statsapi.mlb.com';
 
@@ -31,7 +31,8 @@ def checkForRunScore(link, team_position):
 					# Certainly won't have another run within 90 seconds
 					time.sleep(90)
 				else:
-					time.sleep(10)
+					print 'Sleeping', data['metaData']['wait']
+					time.sleep(parseInt(data['metaData']['wait']))
 			except:
 				time.sleep(60)
 
@@ -57,7 +58,7 @@ def getSchedule():
 					time.sleep(diff.total_seconds()-60)
 					# Trigger the Goal Light to let us know to start watching
 					# the game...
-					triggerGoalLight()
+					triggerGoalLight(30)
 				team_position = 'top'
 				if team_type == 'home':
 					team_position = 'bottom'
