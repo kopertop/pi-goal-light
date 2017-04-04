@@ -29,8 +29,8 @@ def checkForGoal(link):
 					# Probably not going to have another goal within a minute
 					time.sleep(60)
 				else:
-					print 'No goal', lastEvent['result']['eventTypeId'], lastEvent['team']['triCode']
-					time.sleep(10)
+					print 'Sleeping', data['metaData']['wait'], lastEvent['result']['eventTypeId'], lastEvent['team']['triCode']
+					time.sleep(parseInt(data['metaData']['wait']))
 			except:
 				time.sleep(60)
 
